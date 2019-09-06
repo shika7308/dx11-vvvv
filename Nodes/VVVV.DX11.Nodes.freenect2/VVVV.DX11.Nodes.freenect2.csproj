@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C208E9D6-F177-4621-9A96-7D5E830AC407}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VVVV.DX11.Nodes.Freenect2</RootNamespace>
+    <AssemblyName>VVVV.DX11.Nodes.Freenect2</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SlimDX">
+      <HintPath>..\..\Dependencies\x64\SlimDX.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition.Codeplex">
+      <HintPath>..\..\Dependencies\mixed\System.ComponentModel.Composition.Codeplex.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="VVVV.Core">
+      <HintPath>..\..\Dependencies\x64\VVVV.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="VVVV.Hosting">
+      <HintPath>..\..\Dependencies\x64\VVVV.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="VVVV.Nodes.Generic">
+      <HintPath>..\..\Dependencies\x64\VVVV.Nodes.Generic.dll</HintPath>
+    </Reference>
+    <Reference Include="VVVV.PluginInterfaces">
+      <HintPath>..\..\Dependencies\x64\VVVV.PluginInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="VVVV.Utils">
+      <HintPath>..\..\Dependencies\x64\VVVV.Utils.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="KinectBaseTextureNode.cs" />
+    <Compile Include="KinectBodyIndexRawTextureNode.cs" />
+    <Compile Include="KinectCameraIntrinsics.cs" />
+    <Compile Include="KinectColorDepthTextureNode.cs" />
+    <Compile Include="KinectColorTextureNode.cs" />
+    <Compile Include="KinectDepthColorTextureNode.cs" />
+    <Compile Include="KinectDepthTextureNode.cs" />
+    <Compile Include="KinectDepthTextureNodeRaw.cs" />
+    <Compile Include="KinectFaceNode.cs" />
+    <Compile Include="KinectFusionNode.cs" />
+    <Compile Include="KinectGestureNode.cs" />
+    <Compile Include="KinectHandNode.cs" />
+    <Compile Include="KinectHdFaceBufferNode.cs" />
+    <Compile Include="KinectIRTextureNode.cs" />
+    <Compile Include="KinectPlayerTextureNode.cs" />
+    <Compile Include="KinectPreposeGestureNode.cs" />
+    <Compile Include="KinectPreposeGestureStatusNode.cs" />
+    <Compile Include="KinectRayTextureNode.cs" />
+    <Compile Include="KinectRuntime.cs" />
+    <Compile Include="KinectRuntimeNode.cs" />
+    <Compile Include="KinectSkeletonNode.cs" />
+    <Compile Include="KinectWorldTextureNode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\VVVV.DX11.Core\VVVV.DX11.Core.csproj">
+      <Project>{71c0786d-2640-4e39-aa7b-83602f36f3a3}</Project>
+      <Name>VVVV.DX11.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FeralTic\Core\FeralTic.csproj">
+      <Project>{9ead0f44-e6aa-4363-be4d-d944c1d35044}</Project>
+      <Name>FeralTic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
