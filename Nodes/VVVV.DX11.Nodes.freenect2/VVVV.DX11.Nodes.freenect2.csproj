@@ -7,7 +7,7 @@
     <ProjectGuid>{C208E9D6-F177-4621-9A96-7D5E830AC407}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VVVV.DX11.Nodes.Freenect2</RootNamespace>
+    <RootNamespace>VVVV.Nodes.Freenect2</RootNamespace>
     <AssemblyName>VVVV.DX11.Nodes.Freenect2</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -17,10 +17,11 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\Deploy\Debug\x64\packs\dx11\nodes\plugins\freenect2\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="libfreenect2.Net, Version=1.0.7121.2345, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\libfreenect2.Net.dll</HintPath>
+    </Reference>
     <Reference Include="SlimDX">
       <HintPath>..\..\Dependencies\x64\SlimDX.dll</HintPath>
     </Reference>
@@ -63,27 +68,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KinectBaseTextureNode.cs" />
-    <Compile Include="KinectBodyIndexRawTextureNode.cs" />
-    <Compile Include="KinectCameraIntrinsics.cs" />
-    <Compile Include="KinectColorDepthTextureNode.cs" />
     <Compile Include="KinectColorTextureNode.cs" />
-    <Compile Include="KinectDepthColorTextureNode.cs" />
     <Compile Include="KinectDepthTextureNode.cs" />
-    <Compile Include="KinectDepthTextureNodeRaw.cs" />
-    <Compile Include="KinectFaceNode.cs" />
-    <Compile Include="KinectFusionNode.cs" />
-    <Compile Include="KinectGestureNode.cs" />
-    <Compile Include="KinectHandNode.cs" />
-    <Compile Include="KinectHdFaceBufferNode.cs" />
-    <Compile Include="KinectIRTextureNode.cs" />
-    <Compile Include="KinectPlayerTextureNode.cs" />
-    <Compile Include="KinectPreposeGestureNode.cs" />
-    <Compile Include="KinectPreposeGestureStatusNode.cs" />
-    <Compile Include="KinectRayTextureNode.cs" />
+    <Compile Include="KinectFinder.cs" />
     <Compile Include="KinectRuntime.cs" />
-    <Compile Include="KinectRuntimeNode.cs" />
-    <Compile Include="KinectSkeletonNode.cs" />
-    <Compile Include="KinectWorldTextureNode.cs" />
+    <Compile Include="Freenect2Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +84,14 @@
       <Project>{9ead0f44-e6aa-4363-be4d-d944c1d35044}</Project>
       <Name>FeralTic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dependencies\freenect2-openni2.dll" />
+    <Content Include="Dependencies\freenect2.dll" />
+    <Content Include="Dependencies\glfw3.dll" />
+    <Content Include="Dependencies\libfreenect2.Net.dll" />
+    <Content Include="Dependencies\libusb-1.0.dll" />
+    <Content Include="Dependencies\turbojpeg.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
