@@ -77,13 +77,8 @@ namespace VVVV.Nodes.Freenect2
                 return;
 
             this.Runtime.Stop();
-            switch (mode)
-            {
-                case CaptureMode.Both: this.Runtime.StartAll(); break;
-                case CaptureMode.Depth: this.Runtime.StartDepth(); break;
-                case CaptureMode.Color: this.Runtime.StartColor(); break;
-            }
             this.Mode = mode;
+            UpdateCaptureMode();
         }
 
         private void UpdateCaptureMode()
@@ -91,7 +86,7 @@ namespace VVVV.Nodes.Freenect2
             switch (Mode)
             {
                 case CaptureMode.Both: this.Runtime.StartAll(); break;
-                case CaptureMode.Depth: this.Runtime.StartDepth(); break;
+                case CaptureMode.Depth: this.Runtime.StartAll(); break;
                 case CaptureMode.Color: this.Runtime.StartColor(); break;
             }
         }
@@ -141,7 +136,6 @@ namespace VVVV.Nodes.Freenect2
                 colorListener.OnFrame = (a, b) => OnColorFrame?.Invoke(a, b);
                 this.Runtime.SetColorListener(colorListener);
                 UpdateCaptureMode();
-                //Runtime.StartAll();
                 this.IsStarted = true;
             }
             catch

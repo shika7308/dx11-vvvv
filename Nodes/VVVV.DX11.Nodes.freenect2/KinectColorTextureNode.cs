@@ -51,7 +51,6 @@ namespace VVVV.Nodes.Freenect2
 
         private void DepthFrameReady(FrameType type, Frame frame)
         {
-            throw new Exception("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             if (frame == null)
                 return;
 
@@ -94,10 +93,12 @@ namespace VVVV.Nodes.Freenect2
 
         unsafe private void copy(Frame source, IntPtr dest)
         {
-            //var src = (byte*)source.Data;
-            var dst = (byte*)dest;
-            for (var i = 0; i < _width * _height * 4; i++)
-                *(dst++) = 0xff;
+            var src = (int*)source.Data;
+            var dst = (int*)dest;
+            for (var i = 0; i < _width * _height; i++)
+            {
+                *(++dst) = *(++src);
+            }
             //var length = Width * Height;
             //for (var i = 0; i < length; ++i, dst += 4)//, src += 3)
             //{
@@ -132,11 +133,13 @@ namespace VVVV.Nodes.Freenect2
         protected override void OnRuntimeConnected()
         {
             this.runtime.OnColorFrame += DepthFrameReady;
+            //this.runtime.OnDepthFrame += DepthFrameReady;
         }
 
         protected override void OnRuntimeDisconnected()
         {
             this.runtime.OnColorFrame -= DepthFrameReady;
+            //this.runtime.OnDepthFrame -= DepthFrameReady;
         }
 
         protected override void Disposing()
