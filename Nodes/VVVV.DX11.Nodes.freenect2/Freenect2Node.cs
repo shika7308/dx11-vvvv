@@ -43,29 +43,26 @@ namespace VVVV.Nodes.Freenect2
         [Output("Serial")]
         protected ISpread<string> FOutKinectID;
 
-        [Output("Error out")]
-        protected ISpread<string> FOutErrorOut;
-
         private KinectRuntime runtime = new KinectRuntime();
 
         public void Evaluate(int SpreadMax)
         {
             bool reset = false;
-            FOutErrorOut[0] = "";
 
             if (string.IsNullOrEmpty(this.FInSerial[0]))
             {
-                this.FInEnabled[0] = false;
-                print(1);
+                reset = true;
             }
 
             if (this.FInSerial.IsChanged)
+            {
                 this.runtime.Assign(this.FInSerial[0]);
+                reset = true;
+            }
             
             if (this.FInReset[0] && !string.IsNullOrEmpty(this.FInSerial[0]))
             {
                 reset = true;
-                print(2);
             }
 
             if (this.FInEnabled.IsChanged || reset)
@@ -73,12 +70,10 @@ namespace VVVV.Nodes.Freenect2
                 if (this.FInEnabled[0])
                 {
                     this.runtime.Start();
-                    print(3);
                 }
                 else
                 {
                     this.runtime.Stop();
-                    print(4);
                 }
 
                 reset = true;
@@ -87,31 +82,22 @@ namespace VVVV.Nodes.Freenect2
             if (this.FInDepthMode.IsChanged || reset)
             {
                 this.runtime.SetDepthMode(this.FInDepthMode[0]);
-                print(5);
             }
 
 
             if (this.FInEnableColor.IsChanged || reset)
             {
                 this.runtime.SetColor(this.FInEnableColor[0]);
-                print(6);
             }
 
             this.FOutRuntime[0] = runtime;
             this.FOutStarted[0] = runtime.IsStarted;
-            print(8);
 
 
             if (runtime.Runtime != null)
             {
                 //runtime only reports ID of the physically connected device. It seems Kinect Tools injected stream does not report ID of the device.
                 this.FOutKinectID[0] = this.FInSerial[0];
-                print(7);
-            }
-
-            void print(object str)
-            {
-                this.FOutErrorOut[0] += str.ToString() + "\n";
             }
         }
 

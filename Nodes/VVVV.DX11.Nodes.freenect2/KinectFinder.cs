@@ -56,9 +56,16 @@ namespace VVVV.Nodes.Freenect2
             {
                 foreach (var i in ids)
                     i(string.Empty);
+                var numOfDevice = kinectHandler.EnumerateDevices();
+                //Console.WriteLine(numOfDevice);
                 var cnt = Math.Min(ids.Length - 1, kinectHandler.EnumerateDevices());
+                //Console.WriteLine(cnt);
                 for (var i = 0; i < cnt; i++)
-                    ids[i](kinectHandler.GetDeviceSerialNumber(i));
+                {
+                    var serial = kinectHandler.GetDeviceSerialNumber(i);
+                    //Console.WriteLine(serial);
+                    ids[i](serial);
+                }
             }
         }
     }
