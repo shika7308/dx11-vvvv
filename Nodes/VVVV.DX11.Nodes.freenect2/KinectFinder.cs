@@ -58,7 +58,7 @@ namespace VVVV.Nodes.Freenect2
                     i(string.Empty);
                 var numOfDevice = kinectHandler.EnumerateDevices();
                 //Console.WriteLine(numOfDevice);
-                var cnt = Math.Min(ids.Length - 1, kinectHandler.EnumerateDevices());
+                var cnt = Math.Min(ids.Length, kinectHandler.EnumerateDevices());
                 //Console.WriteLine(cnt);
                 for (var i = 0; i < cnt; i++)
                 {
