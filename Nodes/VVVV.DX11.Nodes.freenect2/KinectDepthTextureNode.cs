@@ -85,7 +85,8 @@ namespace VVVV.Nodes.Freenect2
             var dst = (ushort*)dest;
             var length = Width * Height;
             for (var i = 0; i < length; ++i, dst++, src++)
-                *dst = (ushort)(*src / 8000 * ushort.MaxValue);
+                //*dst = (ushort)(*src / 8000 * ushort.MaxValue);
+                *dst = (ushort)*src;
         }
 
         protected override int Width

@@ -36,6 +36,9 @@ namespace VVVV.Nodes.Freenect2
         [Output("Kinect ID 4")]
         public ISpread<string> FOutKinectID4;
 
+        [Output("Kinect Count")]
+        public ISpread<int> Count;
+
         private Action<string>[] ids;
         private Context kinectHandler => Context;
 
@@ -58,7 +61,8 @@ namespace VVVV.Nodes.Freenect2
                     i(string.Empty);
                 var numOfDevice = kinectHandler.EnumerateDevices();
                 //Console.WriteLine(numOfDevice);
-                var cnt = Math.Min(ids.Length, kinectHandler.EnumerateDevices());
+                var cnt = Math.Min(ids.Length, numOfDevice + 1);
+                Count[0] = cnt;
                 //Console.WriteLine(cnt);
                 for (var i = 0; i < cnt; i++)
                 {

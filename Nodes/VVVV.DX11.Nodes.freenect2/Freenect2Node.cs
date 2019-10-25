@@ -40,6 +40,9 @@ namespace VVVV.Nodes.Freenect2
         [Output("Is Started", IsSingle = true)]
         protected ISpread<bool> FOutStarted;
 
+        [Output("CxCyFxFy")]
+        protected ISpread<Vector4D> FOutCxCyFxFy;
+
         [Output("Serial")]
         protected ISpread<string> FOutKinectID;
 
@@ -70,6 +73,10 @@ namespace VVVV.Nodes.Freenect2
                 if (this.FInEnabled[0])
                 {
                     this.runtime.Start();
+                    var param = this.runtime.Runtime.InfraRedCameraParameters;
+                    if (param.FocalLengthX == 0) param.FocalLengthX = 1;
+                    if (param.FocalLengthY == 0) param.FocalLengthY = 1;
+                    FOutCxCyFxFy[0] = new Vector4D(param.PrincipalPointX, param.PrincipalPointY, param.FocalLengthX, param.FocalLengthY);
                 }
                 else
                 {

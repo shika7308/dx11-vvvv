@@ -130,10 +130,24 @@ namespace VVVV.Nodes.Freenect2
             {
                 this.Runtime = findDevice();
                 var depthListener = new FrameListener();
-                depthListener.OnFrame = (a, b) => OnDepthFrame?.Invoke(a, b);
+                var reg = new Registration(this.Runtime.InfraRedCameraParameters, this.Runtime.ColorCameraParameters);
+                var frame = default(Frame);
+                depthListener.OnFrame = (a, b) =>
+                {
+                    if (OnDepthFrame != null)
+                    {
+                        if (frame == default(Frame))
+                            frame = new Frame(b.Width, b.Height, FrameDataFormat.Float);
+                        reg.UndistortDepth(b, frame);
+                        OnDepthFrame.Invoke(a, frame);
+                    }
+                };
                 this.Runtime.SetDepthListener(depthListener);
                 var colorListener = new FrameListener();
-                colorListener.OnFrame = (a, b) => OnColorFrame?.Invoke(a, b);
+                colorListener.OnFrame = (a, b) =>
+                {
+                    OnColorFrame?.Invoke(a, b);
+                };
                 this.Runtime.SetColorListener(colorListener);
                 UpdateCaptureMode();
                 this.IsStarted = true;
